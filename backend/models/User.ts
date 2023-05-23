@@ -1,7 +1,17 @@
-import { DataTypes } from "sequelize";
+import Sequelize, { DataTypes } from "sequelize";
 import sequelize from "../database/index";
 
-const User = sequelize.define("User", {
+interface UserModel {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+}
+
+interface UserInstance extends UserModel, Sequelize.Model<UserModel, any> {}
+
+const User = sequelize.define<UserInstance>("User", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,

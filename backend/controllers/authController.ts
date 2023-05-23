@@ -3,8 +3,6 @@ import User from "../models/User";
 import bcrypt from "bcrypt";
 import jwt, { Secret } from "jsonwebtoken";
 
-const TOKEN = process.env.TOKEN;
-
 export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
@@ -52,13 +50,13 @@ export const signup = async (req: Request, res: Response) => {
     });
 
     if (userExists) {
-      res.status(409).json({ error: "Email already in use" });
+      return res.status(409).json({ error: "Email already in use" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await User.create({
-      email: email,
+      email,
       firstname: firstname,
       lastname: lastname,
       password: hashedPassword,
@@ -76,6 +74,7 @@ export const signup = async (req: Request, res: Response) => {
 
     res.json({ token });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 };

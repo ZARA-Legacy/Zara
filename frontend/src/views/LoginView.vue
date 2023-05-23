@@ -11,7 +11,6 @@
                   <input
                     v-model="email"
                     class="form-control"
-                    type="email"
                     placeholder="E-MAIL"
                   />
                 </div>
@@ -59,17 +58,13 @@ export default defineComponent({
         if (email.value === "" || password.value === "") {
           return alert("fill the rows please");
         }
-        const response = await axios.post("http://localhost:3000/api/login", {
+        const response = await axios.post("http://localhost:3000/auth/login", {
           email: email.value,
           password: password.value,
         });
-        if (response.data.message) {
-          alert("Welcome to zara");
-          // Redirect to another route
-          // router.push('/');
-        } else {
-          alert(response.data.message);
-        }
+        alert("logged in");
+        window.localStorage.setItem("token", JSON.stringify(response.data));
+        window.location.href = "/";
       } catch (error) {
         alert("check your password or email");
       }
