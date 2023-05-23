@@ -6,6 +6,7 @@ import cors from "cors";
 import morgan from "morgan";
 
 import authRoute from "./routes/authRoute";
+import routerP from "./routes/products"
 
 import sequelize from "./database/index";
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
 app.use("/auth", authRoute);
+app.use("/products", routerP)
 
 sequelize.sync().then(() => {
   app.listen(3000, () => {
