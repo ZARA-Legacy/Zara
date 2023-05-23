@@ -1,6 +1,9 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/index';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 658848a (.)
 const Cart = sequelize.define('cart', {
   id: {
     type: DataTypes.INTEGER,
