@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize";
+import { Sequelize } from 'sequelize';
 
 export default new Sequelize(
   process.env.database as string,
@@ -9,3 +9,4 @@ export default new Sequelize(
     host: process.env.host as string,
   }
 );
+
