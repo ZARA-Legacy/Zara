@@ -1,7 +1,6 @@
 import { DataTypes } from 'sequelize';
-import db from '../database/index';
-
-const Cart = db.define('cart', {
+import sequelize from '../database/index';
+const Cart = sequelize.define('cart', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
