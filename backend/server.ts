@@ -1,10 +1,11 @@
 import express, { Express } from "express";
 import cors from "cors";
 import morgan from "morgan";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 import sequelize from "./database/index";
 
-// Create an instance of Express server
 const app: Express = express();
 
 app.use(express.json());

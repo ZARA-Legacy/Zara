@@ -1,9 +1,11 @@
 import { Sequelize } from 'sequelize';
-import config from './config';
 
-const sequelize = new Sequelize(config.database, config.username, config.password, {
-  dialect: 'mysql',
-  host: config.host,
-});
-
-export default sequelize;
+export default new Sequelize(
+  process.env.database as string,
+  process.env.user as string,
+  process.env.password as string,
+  {
+    dialect: "mysql",
+    host: process.env.host as string,
+  }
+);
