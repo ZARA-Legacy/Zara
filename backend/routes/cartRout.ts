@@ -1,9 +1,7 @@
-import { Router } from 'express';
-import { CartContr } from '../controllers/cartContr';
-import { Cart } from '../models/Cart'; // Assuming you have a Cart model defined
+import express from 'express';
+import cartController from '../controllers/cartContr';
 
-const routeCart = Router();
-const cartController = new CartController();
+const routeCart = express.Router();
 
 routeCart.get('/cart', cartController.allCarts);
 routeCart.get('/cart/:id', cartController.cartForUser);

@@ -3,47 +3,69 @@ import Cart from '../models/Cart';
 
 const allCarts = async (req: Request, res: Response) => {
   try {
-    const result = await Cart.getAllCarts();
-    res.json(result);
-  } catch (err) {
-    res.json(err);
+    const carts = await Cart.findAll();
+    res.json(carts);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
 const cartForUser = async (req: Request, res: Response) => {
+  const userId = req.params.id;
+
   try {
-    const results = await Cart.getCartsOfUser(req.params.id);
-    res.json(results);
-  } catch (err) {
-    res.json(err);
+    const carts = await Cart.findAll({
+      where: {
+        user_id: userId,
+      },
+    });
+    res.json(carts);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
 const toCart = async (req: Request, res: Response) => {
+  const { user_id, product_id } = req.body;
+
   try {
-    const { user_id, product_id } = req.body;
-    await Cart.addCart(user_id, product_id);
+    await Cart.create({
+      user_id,
+      product_id,
+    });
     res.json({ message: 'Product successfully added to your cart' });
-  } catch (err) {
-    res.json(err);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
 const remove = async (req: Request, res: Response) => {
+  const cartId = req.params.id;
+
   try {
-    await Cart.removeCart(req.params.id);
+    await Cart.destroy({
+      where: {
+        id: cartId,
+      },
+    });
     res.json('Deleted');
-  } catch (err) {
-    res.json(err);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
 const removeCartOfUser = async (req: Request, res: Response) => {
+  const userId = Number(req.params.id);
+
   try {
-    await Cart.removeByUser(Number(req.params.id));
+    await Cart.destroy({
+      where: {
+        user_id: userId,
+      },
+    });
     res.json('Deleted');
-  } catch (err) {
-    res.json(err);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
@@ -52,5 +74,5 @@ export default {
   cartForUser,
   toCart,
   remove,
-  removeCartOfUser
+  removeCartOfUser,
 };

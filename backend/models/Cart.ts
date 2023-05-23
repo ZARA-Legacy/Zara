@@ -1,64 +1,33 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import sequelize from '../database/index';
-<<<<<<< HEAD
 
-=======
->>>>>>> 658848a (.)
-const Cart = sequelize.define('cart', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  user_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  product_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-});
+class Cart extends Model {
+  id!: number;
+  user_id!: number;
+  product_id!: number;
+}
 
-const getAllCarts = () => {
-  return Cart.findAll();
-};
-
-const getCartsOfUser = (user_id) => {
-  return Cart.findAll({
-    where: {
-      user_id: user_id,
+Cart.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-  });
-};
-
-const addCart = (user_id, product_id) => {
-  return Cart.create({
-    user_id: user_id,
-    product_id: product_id,
-  });
-};
-
-const removeCart = (product_id) => {
-  return Cart.destroy({
-    where: {
-      product_id: product_id,
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
-  });
-};
-
-const removeByUser = (user_id) => {
-  return Cart.destroy({
-    where: {
-      user_id: user_id,
+    product_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
-  });
-};
+  },
+  {
+    sequelize,
+    modelName: 'cart',
+    tableName: 'cart',
+  }
+);
 
-export default {
-  getAllCarts,
-  getCartsOfUser,
-  removeCart,
-  addCart,
-  removeByUser,
-};
+export default Cart;

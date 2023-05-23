@@ -1,9 +1,6 @@
 import { Sequelize } from 'sequelize';
-<<<<<<< HEAD
-=======
-import config from './config';
 
->>>>>>> 658848a (.)
+
 
 export default new Sequelize(
   process.env.database as string,
