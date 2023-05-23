@@ -1,7 +1,5 @@
 import { Sequelize } from 'sequelize';
 
-
-
 export default new Sequelize(
   process.env.database as string,
   process.env.user as string,
