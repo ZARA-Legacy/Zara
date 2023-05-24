@@ -6,6 +6,7 @@ const allCarts = async (req: Request, res: Response) => {
     const carts = await Cart.findAll();
     res.json(carts);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };
