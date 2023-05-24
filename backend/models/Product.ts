@@ -1,16 +1,18 @@
 import { DataTypes  } from 'sequelize'
-import connection from '../database/index'
-const Model = connection.define('products', {
+import sequelize from '../database/index'
+
+const Product = sequelize.define('Product', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
-  category: {
-    type: DataTypes.STRING
-  },
-  gender: {
-    type: DataTypes .STRING
-  }
-})
-export default Model
+  name: DataTypes.STRING,
+  image: DataTypes.STRING,
+  price: DataTypes.FLOAT,
+  quantity: DataTypes.INTEGER,
+  gender: DataTypes.STRING,
+  category: DataTypes.STRING,
+  description: DataTypes.STRING,
+});
+export default Product;
