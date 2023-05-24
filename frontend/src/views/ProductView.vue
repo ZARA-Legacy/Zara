@@ -86,12 +86,12 @@ export default defineComponent({
 
     const addToCart = (product: Product) => {
       const newCart = {
-        users_id: 1,
+        user_id: 1,
         products_id: product.id,
       };
 
       axios
-        .post("http://localhost:4001/zara/cart/add", newCart)
+        .post("http://127.0.0.1:3000/cart/cart", newCart)
         .then((res) => {
           console.log("Product added to cart:", res.data);
           cart.value.push(product);

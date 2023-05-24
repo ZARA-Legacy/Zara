@@ -4,7 +4,7 @@ import sequelize from '../database/index';
 class Cart extends Model {
   id!: number;
   user_id!: number;
-  product_id!: number;
+  products_id!: number;
 }
 
 Cart.init(
@@ -18,7 +18,7 @@ Cart.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    product_id: {
+    products_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
