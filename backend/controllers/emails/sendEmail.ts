@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import sendinblue from "./sendInBlue";
 
 export const sendEmail = async (req: Request, res: Response) => {
-  const { email = "jeghamnidhal7@gmail.com", msg = "", name = "" } = req.body;
+  const { email = "waeldghim7@gmail.com", name = "" } = req.body;
 
   try {
     let sendSmtpEmail = {
@@ -15,7 +15,7 @@ export const sendEmail = async (req: Request, res: Response) => {
       params: {
         name,
         email,
-        link: msg,
+        link: "http://localhost:5173/confirm-email",
       },
     };
 
