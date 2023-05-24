@@ -8,16 +8,28 @@
       >
         <div class="card h-100">
           <img :src="product.image" :alt="product.name" class="card-img-top" />
-          <div class="card-body d-flex flex-row justify-content-between p-0 pt-1.5">
+          <div
+            class="card-body d-flex flex-row justify-content-between p-0 pt-1.5"
+          >
             <span
               class="card-title mb-3 text-left details"
-              :style="{ fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '15px', paddingLeft: '20px', paddingTop: '5px' }"
+              :style="{
+                fontFamily: 'Arial, Helvetica, sans-serif',
+                fontSize: '15px',
+                paddingLeft: '20px',
+                paddingTop: '5px',
+              }"
             >
               {{ product.name }}
             </span>
             <span
               class="mb-3 text-right details"
-              :style="{ fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '15px', paddingRight: '20px', paddingTop: '5px' }"
+              :style="{
+                fontFamily: 'Arial, Helvetica, sans-serif',
+                fontSize: '15px',
+                paddingRight: '20px',
+                paddingTop: '5px',
+              }"
             >
               ${{ product.price }}
             </span>
@@ -36,8 +48,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue';
-import axios from 'axios';
+import { defineComponent, ref, onMounted } from "vue";
+import axios from "axios";
 
 interface Product {
   id: number;
@@ -52,14 +64,14 @@ interface Product {
 
 export default defineComponent({
   setup() {
-    const gender = ref('');
-    const category = ref('');
+    const gender = ref("");
+    const category = ref("");
     const data = ref<Product[]>([]);
     const cart = ref<Product[]>([]);
 
     const fetchData = () => {
       axios
-        .get(`http://localhost:4001/zara/product/${gender.value}/${category.value}`)
+        .get(`http://localhost:3000/products/products`)
         .then((res) => {
           data.value = res.data;
         })
@@ -69,11 +81,7 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      category.value = window.location.pathname.split('/')[2];
-      gender.value = window.location.pathname.split('/')[1];
-      if (category.value && gender.value) {
-        fetchData();
-      }
+      fetchData();
     });
 
     const addToCart = (product: Product) => {
@@ -83,13 +91,13 @@ export default defineComponent({
       };
 
       axios
-        .post('http://localhost:4001/zara/cart/add', newCart)
+        .post("http://localhost:4001/zara/cart/add", newCart)
         .then((res) => {
-          console.log('Product added to cart:', res.data);
+          console.log("Product added to cart:", res.data);
           cart.value.push(product);
         })
         .catch((err) => {
-          console.error('Failed to add product to cart:', err);
+          console.error("Failed to add product to cart:", err);
         });
     };
 
