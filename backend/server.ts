@@ -1,16 +1,16 @@
-import * as dotenv from "dotenv";
-dotenv.config();
+import * as dotenv from "dotenv"
+dotenv.config()
 
-import express, { Express } from "express";
-import cors from "cors";
-import morgan from "morgan";
-import authRoute from "./routes/authRoute";
+import express, { Express } from "express"
+import cors from "cors"
+import morgan from "morgan"
+import authRoute from "./routes/authRoute"
 import routerP from "./routes/products"
 import cartRoute from "./routes/cartRout"
-import Product from "./models/Product";
+import Product from "./models/Product"
 import data from "./database/db"
 
-import sequelize from "./database/index";
+import sequelize from "./database/index"
 
 const app: Express = express();
 
@@ -23,7 +23,7 @@ app.use("/cart", cartRoute)
 
 sequelize.sync().then(() => {
   app.listen(3000, () => {
-    console.log("Server is running on port 3000");
+    console.log("Server is running on port 3000")
   });
 }).then(() => {
   async function insertDummyData() {
