@@ -33,7 +33,7 @@ export const login = async (req: Request, res: Response) => {
       process.env.TOKEN as Secret
     );
 
-    res.status(200).json({ token });
+    res.status(200).json({ token, id: user.id });
   } catch (error) {
     res.status(500).json(error);
   }
@@ -72,7 +72,7 @@ export const signup = async (req: Request, res: Response) => {
       process.env.TOKEN as Secret
     );
 
-    res.json({ token });
+    res.json({ token, id: newUser.id });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
