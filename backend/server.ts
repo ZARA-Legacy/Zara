@@ -4,9 +4,9 @@ dotenv.config();
 import express, { Express } from "express";
 import cors from "cors";
 import morgan from "morgan";
-
 import authRoute from "./routes/authRoute";
 import routerP from "./routes/products"
+import cartRoute from "./routes/cartRout"
 
 import sequelize from "./database/index";
 
@@ -17,6 +17,7 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use("/auth", authRoute);
 app.use("/products", routerP)
+app.use("/cart", cartRoute)
 
 sequelize.sync().then(() => {
   app.listen(3000, () => {
