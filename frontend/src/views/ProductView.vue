@@ -41,21 +41,19 @@
           >
             Add to Cart
             <div v-if="showAlert" class="alert success">
-      Item added successfully!
-    </div>
+              Item added successfully!
+            </div>
           </button>
-        </div>
         </div>
       </div>
     </div>
-  
+  </div>
 </template>
-
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
 import axios from "axios";
-import ProductItem from "../components/ProductItem.vue"
+import ProductItem from "../components/ProductItem.vue";
 
 interface Product {
   id: number;
@@ -70,8 +68,9 @@ interface Product {
 
 export default defineComponent({
   setup() {
+    const currentUser = JSON.parse(window.localStorage.getItem("token"));
     const showAlert = ref(false); // Declare showAlert as a reactive property
-    
+
     const gender = ref("");
     const category = ref("");
     const data = ref<Product[]>([]);
@@ -95,7 +94,7 @@ export default defineComponent({
 
     const addToCart = (product: Product) => {
       const newCart = {
-        user_id: 1,
+        user_id: currentUser.id,
         products_id: product.id,
       };
 
@@ -127,4 +126,3 @@ export default defineComponent({
   },
 });
 </script>
-
