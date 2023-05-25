@@ -97,6 +97,7 @@ export default defineComponent({
             },
           }
         );
+        console.log(emailSent)
         alert("Your account has been created");
         window.localStorage.setItem("token", JSON.stringify(response.data));
         window.location.href = "/";
