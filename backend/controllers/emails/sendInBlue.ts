@@ -6,7 +6,7 @@ var apiKey = defaultClient.authentications["api-key"];
 apiKey.apiKey = process.env.SMTP_KEY;
 
 var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-console.log(apiInstance);
+
 const sendinblue = async (sendSmtpEmail: any) => {
   try {
     apiInstance.sendTransacEmail(sendSmtpEmail).then(
