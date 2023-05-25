@@ -50,6 +50,8 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
 import axios from "axios";
+const currentUser = JSON.parse(window.localStorage.getItem("token"))
+
 
 interface Product {
   id: number;
@@ -74,7 +76,9 @@ export default defineComponent({
         .get(`http://localhost:3000/products/products`)
         .then((res) => {
           data.value = res.data;
+          console.log(data)
         })
+        
         .catch((err) => {
           console.log(err);
         });
@@ -86,12 +90,12 @@ export default defineComponent({
 
     const addToCart = (product: Product) => {
       const newCart = {
-        users_id: 1,
+        user_id: currentUser.id,
         products_id: product.id,
       };
 
       axios
-        .post("http://localhost:4001/zara/cart/add", newCart)
+        .post("http://127.0.0.1:3000/cart/cart", newCart)
         .then((res) => {
           console.log("Product added to cart:", res.data);
           cart.value.push(product);

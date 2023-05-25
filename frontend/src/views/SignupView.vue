@@ -85,6 +85,19 @@ export default defineComponent({
         );
 
         console.log(response);
+        const emailSent = await axios.post(
+          "http://localhost:3000/api/email",
+          {
+            name: `${this.lastname} ${this.firstname}`,
+            email: this.email,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log(emailSent)
         alert("Your account has been created");
         window.localStorage.setItem("token", JSON.stringify(response.data));
         window.location.href = "/";

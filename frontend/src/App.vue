@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
-import SearchPage from "./components/home.vue"
+import navbar from "./components/navbar.vue"
 </script>
 
 <template>
+  <navbar/>
   <RouterView />
-  <SearchPage />
 </template>
 
 <style scoped></style>

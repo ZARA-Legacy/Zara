@@ -23,6 +23,8 @@
     "mysql2": "^3.3.2",
     "nodemon": "^2.0.22",
     "sequelize": "^6.31.1",
+    "sib-api-v3-sdk": "^8.5.0",
+    "sib-api-v3-typescript": "^2.2.2",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },
