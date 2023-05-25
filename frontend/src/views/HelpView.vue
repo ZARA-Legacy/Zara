@@ -56,7 +56,16 @@
     border: none;
     border-bottom: 1px solid rgb(8, 8, 8);
     padding: 0.2em 0em;
-  }
+    font-size: var(--font-size-heading-m-highlight);
+    height: 44px;
+    width: 100%;
+    line-height: var(--line-height-heading-m-highlight);
+    letter-spacing: var(--letter-spacing-heading-m-highlight);
+    text-transform: uppercase;
+    font-stretch: var(--font-stretch-normal);
+    font-weight: var(--font-weight-medium);
+}
+
   .head {
     margin-right: 1000px;
     margin-top: -120px;
