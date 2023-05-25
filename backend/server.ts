@@ -13,6 +13,7 @@ import Product from "./models/Product";
 import data from "./database/db";
 
 import sequelize from "./database/index";
+import routeHelp from "./routes/helpRoutes";
 
 const app: Express = express();
 
@@ -25,6 +26,7 @@ app.use("/products", routerP);
 app.use("/cart", cartRoute);
 app.use("/api", emailRoute);
 app.use("/admin", adminRoute);
+app.use("/question",routeHelp)
 
 sequelize
   .sync()

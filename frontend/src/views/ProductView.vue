@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="container" style="margin-top: 150px">
     <div class="row justify-content-center">
       <div
@@ -45,11 +45,16 @@
       </div>
     </div>
   </div>
+</template> -->
+
+<template>
+  <home />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
 import axios from "axios";
+import home from "../components/home.vue";
 const currentUser = JSON.parse(window.localStorage.getItem("token"))
 
 
@@ -65,6 +70,7 @@ interface Product {
 }
 
 export default defineComponent({
+  components: { home },
   setup() {
     const gender = ref("");
     const category = ref("");
