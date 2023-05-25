@@ -6,6 +6,7 @@ const allCarts = async (req: Request, res: Response) => {
     const carts = await Cart.findAll();
     res.json(carts);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -26,15 +27,16 @@ const cartForUser = async (req: Request, res: Response) => {
 };
 
 const toCart = async (req: Request, res: Response) => {
-  const { user_id, product_id } = req.body;
+  const { user_id, products_id } = req.body;
 
   try {
     await Cart.create({
       user_id,
-      product_id,
+      products_id,
     });
     res.json({ message: 'Product successfully added to your cart' });
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: 'Internal server error' });
   }
 };
