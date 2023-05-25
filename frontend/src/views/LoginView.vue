@@ -63,7 +63,7 @@ export default defineComponent({
         const response = await axios.post("http://localhost:3000/auth/login", {
           email: email.value,
           password: password.value,
-        });
+        });// const currentUser = JSON.parse(window.localStorage.getItem("token"))
         alert("logged in");
         window.localStorage.setItem("token", JSON.stringify(response.data));
         window.location.href = "/";

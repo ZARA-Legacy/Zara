@@ -50,6 +50,8 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
 import axios from "axios";
+const currentUser = JSON.parse(window.localStorage.getItem("token"))
+
 
 interface Product {
   id: number;
@@ -88,7 +90,7 @@ export default defineComponent({
 
     const addToCart = (product: Product) => {
       const newCart = {
-        user_id: 1,
+        user_id: currentUser.id,
         products_id: product.id,
       };
 
