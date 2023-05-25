@@ -29,6 +29,7 @@
         </container>
       </navbar>
     </template>
+    
   </div>
 </template>
 
