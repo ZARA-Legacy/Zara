@@ -74,7 +74,9 @@ export default defineComponent({
         .get(`http://localhost:3000/products/products`)
         .then((res) => {
           data.value = res.data;
+          console.log(data)
         })
+        
         .catch((err) => {
           console.log(err);
         });

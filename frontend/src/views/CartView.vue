@@ -84,14 +84,8 @@
   <script lang="ts">
   import { defineComponent, ref, onMounted } from 'vue';
   import axios from 'axios';
-  import {
-    MDBCardBody,
-    MDBRow,
-    MDBCol,
-    MDBCard,
-    MDBCardImg,
-    MDBContainer,
-  } from 'mdb-vue-ui-kit';
+  import { MDBCardBody, MDBRow, MDBCol, MDBCard, MDBCardImg, MDBContainer } from 'mdb-vue-ui-kit';
+
   
   interface Product {
     id: number;
@@ -121,6 +115,7 @@
   
       const fetchProduct = async () => {
         const arr: Product[] = [];
+        console.log(cart,'cart')
         await fetch();
   
         if (cart.value.length > 0) {
@@ -138,6 +133,7 @@
       };
   
       const handleDelete = async (productId: number) => {
+        console.log(productId,'productId')
         try {
           await axios.delete(`http://127.0.0.1:3000/cart/${productId}`);
           fetchProduct(); // Fetch updated cart after deletion
