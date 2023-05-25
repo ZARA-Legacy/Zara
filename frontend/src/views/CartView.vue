@@ -84,14 +84,14 @@
   <script lang="ts">
   import { defineComponent, ref, onMounted } from 'vue';
   import axios from 'axios';
-  import {
-    MDBCardBody,
-    MDBRow,
-    MDBCol,
-    MDBCard,
-    MDBCardImg,
-    MDBContainer,
-  } from 'mdb-vue-ui-kit';
+  // import {
+  //   MDBCardBody,
+  //   MDBRow,
+  //   MDBCol,
+  //   MDBCard,
+  //   MDBCardImg,
+  //   MDBContainer,
+  // } from 'mdb-vue-ui-kit';
   
   interface Product {
     id: number;

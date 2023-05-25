@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <b-navbar bg="transparent" expand="lg" variant="light" class="navbar" fixed="top">
       <Sidebar />
@@ -42,9 +42,9 @@
       </b-container>
     </b-navbar>
   </div>
-</template>
+  </template>
 
-<script>
+<script lang="ts">
 import { BNavbar, BNavbarBrand, BNavbarToggle, BCollapse, BNav, BNavItem, BContainer } from 'bootstrap-vue';
 import Sidebar from './sidbar.vue';
 import {defineComponent} from "vue"
@@ -60,11 +60,11 @@ export default defineComponent({
     BContainer,
     Sidebar
   }
-});
+})
 </script>
 <style scoped>
 .navbar {
-  background-color: transparent;
+  background-color: transparent
 }
 
 .navbar-brand img {
@@ -90,4 +90,7 @@ export default defineComponent({
 }
 
 
-</style>
+</style> -->
+<template></template>
+
+<script></script>
