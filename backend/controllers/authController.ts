@@ -17,6 +17,10 @@ export const login = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "User not found" });
     }
 
+    if (!user?.emailConfirmed) {
+      return res.status(401).json({ error: "Please confirm your email" });
+    }
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
@@ -33,7 +37,7 @@ export const login = async (req: Request, res: Response) => {
       process.env.TOKEN as Secret
     );
 
-    res.status(200).json({ token });
+    res.status(200).json({ token, id: user.id });
   } catch (error) {
     res.status(500).json(error);
   }
@@ -43,13 +47,13 @@ export const signup = async (req: Request, res: Response) => {
   try {
     const { email, password, firstname, lastname } = req.body;
 
-    const userExists = await User.findOne({
+    const user = await User.findOne({
       where: {
         email: email,
-      },
+      }, 
     });
 
-    if (userExists) {
+    if (user) {
       return res.status(409).json({ error: "Email already in use" });
     }
 
@@ -72,9 +76,29 @@ export const signup = async (req: Request, res: Response) => {
       process.env.TOKEN as Secret
     );
 
-    res.json({ token });
+    res.json({ token, id: newUser.id });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
+  }
+};
+
+export const confirmEmail = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  try {
+    const user = await User.findOne({
+      where: {
+        id,
+      },
+    });
+
+    user?.set({
+      emailConfirmed: true,
+    });
+    await user?.save();
+    res.status(200).json("email confirmed");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
   }
 };
