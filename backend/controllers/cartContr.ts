@@ -13,6 +13,7 @@ const allCarts = async (req: Request, res: Response) => {
 
 const cartForUser = async (req: Request, res: Response) => {
   const userId = req.params.id;
+  console.log(userId);
 
   try {
     const carts = await Cart.findAll({

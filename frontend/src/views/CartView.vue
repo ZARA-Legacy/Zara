@@ -17,7 +17,7 @@
       </MDBCardBody>
       <MDBContainer>
         <MDBRow class="justify-content-center">
-          <template v-for="item in productsUser" :key="item.id">
+          <template v-for="item in cart" :key="item.id">
             <MDBCol md="12" lg="4" class="mb-4">
               <MDBCard class="h-100">
                 <MDBCardImage :src="item.image" :alt="item.name" class="w-100" />
@@ -100,37 +100,44 @@
   export default defineComponent({
     name: 'Cart',
     setup() {
-      const cart = ref<any[]>([]);
+      const currentUser = JSON.parse(window.localStorage.getItem("token"))
+      console.log(currentUser,'currentUser')
       const productsUser = ref<Product[]>([]);
+      let cart = ref<Product[]>([]);
       const show = ref(false);
   
       const fetch = async () => {
         try {
-          const res = await axios.get(`http://localhost:3000/cart/cart`);
-          cart.value = res.data;
+          const res = await axios.get(`http://localhost:3000/cart/cart:${currentUser.id}`);
+          cart = res.data;
+          console.log(cart,'cart')
         } catch (error) {
-          console.error('Error fetching cart:', error);
+          console.error('Error fetching cart:', error,'hedhi loula');
         }
       };
-  
+
       const fetchProduct = async () => {
-        const arr: Product[] = [];
-        console.log(cart,'cart')
-        await fetch();
-  
-        if (cart.value.length > 0) {
-          for (let i = 0; i < cart.value.length; i++) {
-            try {
-              const res = await axios.get(`http://127.0.0.1:3000/product/${cart.value[i].product_id}`);
-              console.log(cart)
-              arr.push(...res.data);
-            } catch (error) {
-              console.error('Error fetching product:', error);
-            }
-          }
-          productsUser.value = arr;
+  const arr: Product[] = [];
+  await fetch();
+
+  if (cart.value) {
+    for (let i = 0; i < cart.value.length; i++) {
+      if (cart.value[i].quantity > 0) {
+        try {
+          const res = await axios.get(`http://localhost:3000/cart/cart:${currentUser.id}`);
+          console.log(cart.value[i], 'cart[i]');
+          arr.push(res.data);
+        } catch (error) {
+          console.error('Error fetching product:', error, 'hedhi thenya');
         }
-      };
+      }
+    }
+    productsUser.value = arr;
+  }
+};
+
+        
+      ;
   
       const handleDelete = async (productId: number) => {
         console.log(productId,'productId')
@@ -138,7 +145,7 @@
           await axios.delete(`http://127.0.0.1:3000/cart/${productId}`);
           fetchProduct(); // Fetch updated cart after deletion
         } catch (error) {
-          console.error('Error deleting from cart:', error);
+          console.error('Error deleting from cart:', error ,'hedhi theltha');
         }
       };
   
@@ -166,7 +173,7 @@
         try {
           await axios.put(`http://127.0.0.1:3000/cart/${item.id}`, { quantity: item.quantity });
         } catch (error) {
-          console.error('Error updating quantity:', error);
+          console.error('Error updating quantity:', error ,'hedhi rab3a');
         }
       };
   
