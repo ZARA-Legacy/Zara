@@ -7,8 +7,7 @@ interface UserModel {
   lastname: string;
   email: string;
   password: string;
-  // token: string;
-  // emailConfirmed: boolean;
+  emailConfirmed: boolean;
 }
 
 interface UserInstance extends UserModel, Sequelize.Model<UserModel, any> {}
@@ -36,14 +35,10 @@ const User = sequelize.define<UserInstance>("User", {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
-  // token: {
-  //   type: DataTypes.STRING(255),
-  //   defaultValue: null,
-  // },
-  // emailConfirmed: {
-  //   type: DataTypes.BOOLEAN,
-  //   defaultValue: false,
-  // },
+  emailConfirmed: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
 });
 
 export default User;
