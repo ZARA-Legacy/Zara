@@ -1,4 +1,61 @@
 <template>
+  <div class="container" style="margin-top: 150px">
+    <div class="row justify-content-center">
+      <div
+        class="col-md-12 col-lg-4 mb-4"
+        v-for="e in cart" :key="e.id" 
+      >
+        <div class="card h-100">
+          <img :src="e.image" :alt="e.name" class="card-img-top" />
+          <div
+            class="card-body d-flex flex-row justify-content-between p-0 pt-1.5"
+          >
+            <span
+              class="card-title mb-3 text-left details"
+              :style="{
+                fontFamily: 'Arial, Helvetica, sans-serif',
+                fontSize: '15px',
+                paddingLeft: '20px',
+                paddingTop: '5px',
+              }"
+            >
+              {{ e.name }}
+            </span>
+            <span
+              class="mb-3 text-right details"
+              :style="{
+                fontFamily: 'Arial, Helvetica, sans-serif',
+                fontSize: '15px',
+                paddingRight: '20px',
+                paddingTop: '5px',
+              }"
+            >
+              ${{ e.price }}
+            </span>
+          </div>
+          <div class="card-text" :style="{
+            fontFamily: 'Arial, Helvetica, sans-serif',
+            fontSize: '15px',
+            paddingLeft: '20px',
+            paddingTop: '5px',
+          }">
+            {{ e.description }}
+          </div>
+          <button
+            class="btn btn-white-hover"
+            style="background-color: white; color: black"
+            @click="handleDelete(e.id)"
+          >
+            Remove from Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<!-- <template>
     <section style="background-color: white">
       <MDBCardBody>
         <MDBRow>
@@ -78,7 +135,7 @@
         </MDBRow>
       </MDBContainer>
     </section>
-  </template>
+  </template> -->
   
   
   <script lang="ts">
@@ -97,6 +154,7 @@
     quantity:number;
     price: number;
     image: string;
+    description:string;
   }
   
   export default defineComponent({
@@ -112,9 +170,10 @@
   
       const fetch = async () => {
         try {
-          const res = await axios.get(`http://localhost:3000/cart/${currentUser}`);
+          const res = await axios.get(`http://localhost:3000/cart/one/${currentUser.id}`);
           cart.value = res.data;
-          console.log(cart,'cart')
+          console.log(cart.value)
+          console.log(currentUser.id,'currentUser.id')
         } catch (error) {
           console.error('Error fetching cart:', error,'hedhi loula');
         }
@@ -128,7 +187,7 @@
       const handleDelete = async (productId: number) => {
         console.log(productId,'productId')
         try {
-          await axios.delete(`http://127.0.0.1:3000/cart/${productId}`);
+          await axios.delete(`http://127.0.0.1:3000/cart/${currentUser.id}/${productId}`);
           fetch(); // Fetch updated cart after deletion
         } catch (error) {
           console.error('Error deleting from cart:', error ,'hedhi theltha');

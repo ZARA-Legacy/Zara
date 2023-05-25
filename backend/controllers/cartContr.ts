@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Cart from '../models/Cart';
+import Product from '../models/Product';
 
 const allCarts = async (req: Request, res: Response) => {
   try {
@@ -21,7 +22,11 @@ const cartForUser = async (req: Request, res: Response) => {
         user_id: userId,
       },
     });
-    res.json(carts);
+     let products: any = []
+    for (let i = 0; i < carts.length; i++) {
+      products.push(await Product.findOne({where: {id: carts[i].products_id}}))
+    }
+    res.json(products);
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
@@ -43,12 +48,12 @@ const toCart = async (req: Request, res: Response) => {
 };
 
 const remove = async (req: Request, res: Response) => {
-  const cartId = req.params.id;
+  const{ user_id, products_id } = req.params;
 
   try {
     await Cart.destroy({
       where: {
-        id: cartId,
+        user_id, products_id
       },
     });
     res.json('Deleted');
