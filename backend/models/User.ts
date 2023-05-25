@@ -8,6 +8,7 @@ interface UserModel {
   email: string;
   password: string;
   emailConfirmed: boolean;
+  isAdmin: boolean;
 }
 
 interface UserInstance extends UserModel, Sequelize.Model<UserModel, any> {}
@@ -36,6 +37,10 @@ const User = sequelize.define<UserInstance>("User", {
     allowNull: false,
   },
   emailConfirmed: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+  isAdmin: {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   },
