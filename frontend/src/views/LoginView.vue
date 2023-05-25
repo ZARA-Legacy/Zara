@@ -1,4 +1,5 @@
 <template>
+  <!-- <navbar /> -->
   <div id="login-page">
     <div id="login-container">
       <div class="row g-0 d-flex">
@@ -45,6 +46,7 @@
 
 <script lang="ts">
 import axios from "axios";
+// import navbar from "../components/navbar.vue"
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({

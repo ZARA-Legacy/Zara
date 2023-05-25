@@ -1,5 +1,5 @@
-import * as dotenv from "dotenv";
-dotenv.config();
+import * as dotenv from "dotenv"
+dotenv.config()
 
 import express, { Express } from "express";
 import cors from "cors";
@@ -11,7 +11,7 @@ import cartRoute from "./routes/cartRout";
 import Product from "./models/Product";
 import data from "./database/db";
 
-import sequelize from "./database/index";
+import sequelize from "./database/index"
 
 const app: Express = express();
 
