@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2016",
+    "module": "commonjs",
+    "strict": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": false,
+    "noImplicitReturns": false,
+    "noUnusedLocals": false,
+    "sourceMap": true
+  },
+  "include": ["src/**/*.ts", "types/**/*.d.ts"],
+  "exclude": ["node_modules"]
+}
