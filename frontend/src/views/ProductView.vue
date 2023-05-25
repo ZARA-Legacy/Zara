@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <div class="container" style="margin-top: 150px">
     <div class="row justify-content-center">
       <div
@@ -45,19 +45,17 @@
     </div>
           </button>
         </div>
+        </div>
       </div>
     </div>
-  </div>
-</template> -->
-
-<template>
-  <home />
+  
 </template>
 
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
 import axios from "axios";
+import ProductItem from "../components/ProductItem.vue"
 
 interface Product {
   id: number;
@@ -71,7 +69,6 @@ interface Product {
 }
 
 export default defineComponent({
-  components: { home },
   setup() {
     const showAlert = ref(false); // Declare showAlert as a reactive property
     
@@ -98,7 +95,7 @@ export default defineComponent({
 
     const addToCart = (product: Product) => {
       const newCart = {
-        user_id: currentUser.id,
+        user_id: 1,
         products_id: product.id,
       };
 
