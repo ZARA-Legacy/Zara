@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import Model from "../models/Product"
+import  Sequelize from "sequelize"
 const controller = {
   getGenderWomen: function (req: Request, res: Response) {
     Model.findAll({ where: { gender: "women" } })
@@ -29,6 +30,24 @@ const controller = {
       })
       .catch((err) => res.status(500).send(err))
   },
+  search: async (req:Request, res: Response)=>{
+    const {name} = req.params;
+    try {
+      const products = await Model.findAll({
+        where: {
+          name: {
+            [Sequelize.Op.like]: name,
+          },
+        },
+      });
+  
+      res.status(200).json(products);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error)
+    }
+
+  }
 }
 
 export default controller 

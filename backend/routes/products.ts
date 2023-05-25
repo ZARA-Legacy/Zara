@@ -19,5 +19,6 @@ routerP.get("/products", controller.getAllProduct)
 // routerP.get("/women/perfume", controller.getAllPerfume)
 // routerP.get("/men/perfume", controller.getAllPerfumeM)
 routerP.put("/:id", controller.updateOneProduct)
+routerP.get("/search/:name", controller.search)
 
 export default routerP
