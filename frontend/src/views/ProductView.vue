@@ -40,16 +40,22 @@
             @click="addToCart(product)"
           >
             Add to Cart
+            <div v-if="showAlert" class="alert success">
+      Item added successfully!
+    </div>
           </button>
+        </div>
         </div>
       </div>
     </div>
-  </div>
+  
 </template>
+
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
 import axios from "axios";
+import ProductItem from "../components/ProductItem.vue"
 
 interface Product {
   id: number;
@@ -64,6 +70,8 @@ interface Product {
 
 export default defineComponent({
   setup() {
+    const showAlert = ref(false); // Declare showAlert as a reactive property
+    
     const gender = ref("");
     const category = ref("");
     const data = ref<Product[]>([]);
@@ -74,9 +82,8 @@ export default defineComponent({
         .get(`http://localhost:3000/products/products`)
         .then((res) => {
           data.value = res.data;
-          console.log(data)
+          console.log(data.value);
         })
-        
         .catch((err) => {
           console.log(err);
         });
@@ -97,6 +104,12 @@ export default defineComponent({
         .then((res) => {
           console.log("Product added to cart:", res.data);
           cart.value.push(product);
+          showAlert.value = true; // Update showAlert value
+          console.log(showAlert.value);
+          setTimeout(() => {
+            console.log(showAlert.value);
+            showAlert.value = false; // Update showAlert value after 3 seconds
+          }, 3000);
         })
         .catch((err) => {
           console.error("Failed to add product to cart:", err);
@@ -109,7 +122,9 @@ export default defineComponent({
       data,
       cart,
       addToCart,
+      showAlert, // Expose showAlert to the template
     };
   },
 });
 </script>
+
