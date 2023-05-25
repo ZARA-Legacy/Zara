@@ -5,6 +5,7 @@ import CartView from "../views/CartView.vue";
 import ProductView from "../views/ProductView.vue";
 import ConfirmEmail from "../views/ConfirmEmail.vue";
 import HomeView from "../views/HomeView.vue";
+import ManageUsers from "../views/admin/AdminUserView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -15,6 +16,13 @@ const router = createRouter({
     { path: "/confirm-email/:id", name: "confEmail", component: ConfirmEmail },
     { path: "/cart", name: "cart", component: CartView },
     { path: "/prod", name: "product", component: ProductView },
+    {
+      path: "/admin",
+      name: "admin",
+      children: [
+        { path: "users", name: "admin-users", component: ManageUsers },
+      ],
+    },
   ],
 });
 
