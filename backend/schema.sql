@@ -14,8 +14,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema zara
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `zara` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `zara`;
+CREATE SCHEMA IF NOT EXISTS `zara` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `zara` ;
 
 -- -----------------------------------------------------
 -- Table `zara`.`products`
@@ -28,14 +28,15 @@ CREATE TABLE IF NOT EXISTS `zara`.`products` (
   `quantity` INT NOT NULL,
   `price` INT NOT NULL,
   `image` VARCHAR(500) NOT NULL,
-  `description` VARCHAR(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-)
+  `description` VARCHAR(500) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_0900_ai_ci' NOT NULL,
+  `createdAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 121
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
+
 
 -- -----------------------------------------------------
 -- Table `zara`.`users`
@@ -47,40 +48,54 @@ CREATE TABLE IF NOT EXISTS `zara`.`users` (
   `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `emailConfirmed` TINYINT NOT NULL DEFAULT '0',
-  `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE
-)
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 15
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
+
 
 -- -----------------------------------------------------
 -- Table `zara`.`cart`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `zara`.`cart` (
-  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
   `products_id` INT NOT NULL,
-  `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
   INDEX `fk_user_has_products_products1_idx` (`products_id` ASC) VISIBLE,
   INDEX `fk_user_has_products_user_idx` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_users_has_products_users`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `zara`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_has_products_products1`
     FOREIGN KEY (`products_id`)
-    REFERENCES `zara`.`products` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-)
+    REFERENCES `zara`.`products` (`id`),
+  CONSTRAINT `fk_users_has_products_users`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `zara`.`users` (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 10
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `zara`.`help`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `zara`.`help` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `question` VARCHAR(255) NOT NULL,
+  `answer` VARCHAR(255) NOT NULL,
+  `createdAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
