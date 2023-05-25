@@ -1,184 +1,134 @@
 <template>
-    <Card style="width: 20rem; background: white; margin: 20px 10px; position: static" :class="styles['clothescard']">
-      <Card.Img variant="top" :src="el.image" style="width: 318px; height: 400px" />
-      <Card.Body>
-        <div style="display:flex; justify-content: space-between">
-          <Card.Title>{{ el.clothesName }}</Card.Title>
-          <Card.Text>{{ el.price }}£</Card.Text>
-        </div>
-        <template v-if="currentUser && currentUser.id > 0 && currentUser.isAdmin === 0">
-          <Button variant="primary" @click="addToCart">
-            Add to Cart
-          </Button>
-        </template>
-      </Card.Body>
-      <div v-if="currentUser && currentUser.isAdmin === 1">
-        <button @click="remove" style="background: black; border: none; color: white">DELETE</button>
-        <Button variant="primary" @click="handleShow" style="background: white; border: none; color: black" class="btn1">
-          EDIT
-        </Button>
-        <Modal v-model="show" @hide="handleClose">
-          <Modal.Header closeButton>
-            <Modal.Title>Update Product</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Form.Group class="mb-3" controlId="formBasicEmail">
-                <Form.Label>Clothes Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Clothes Name"
-                  v-model="updatedProduct.clothesName"
-                />
-              </Form.Group>
-              <Form.Group class="mb-3" controlId="formBasicEmail">
-                <Form.Label>Image</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Image URL"
-                  v-model="updatedProduct.image"
-                />
-              </Form.Group>
-              <Form.Group class="mb-3" controlId="formBasicEmail">
-                <Form.Label>Price</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Enter Price"
-                  v-model="updatedProduct.price"
-                />
-              </Form.Group>
-              <Form.Group class="mb-3" controlId="formBasicEmail">
-                <Form.Label>Category</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Category"
-                  v-model="updatedProduct.category"
-                />
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" @click="handleClose">
-              Close
-            </Button>
-            <Button variant="primary" style="background: black; border: none" @click="update">
-              Update
-            </Button>
-          </Modal.Footer>
-        </Modal>
+  <div class="card">
+    <img class="card-img-top" :src="el.image" alt="Clothes Image" style="width: 318px; height: 400px" />
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <h5 class="card-title">{{ el.clothesName }}</h5>
+        <p class="card-text">{{ el.price }}£</p>
       </div>
-    </Card>
-  </template>
-  
-  <script>
-  import { ref, useContext } from 'vue';
-  import Button from 'react-bootstrap/Button';
-  import Card from 'react-bootstrap/Card';
-  import Modal from 'react-bootstrap/Modal';
-  import Form from 'react-bootstrap/Form';
-  import axios from 'axios';
-  import { useRouter } from 'vue-router'; // Import the useRouter function
-  
-  import styles from '../styles/Layout.module.css';
-  import { Context } from './Context';
-  
-  export default {
-    props: {
-      el: {
-        type: Object,
-        required: true,
-      },
-      setCount: {
-        type: Function,
-        required: true,
-      },
-      count: {
-        type: Number,
-        required: true,
-      },
+      <template v-if="currentUser && currentUser.id > 0 && currentUser.isAdmin === 0">
+        <button class="btn btn-primary">Add to Cart</button>
+      </template>
+    </div>
+    <div v-if="currentUser && currentUser.isAdmin === 1">
+      <button @click="remove" class="btn btn-danger">DELETE</button>
+      <button @click="handleShow" class="btn btn-primary">EDIT</button>
+      <div v-if="show">
+        <div class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Update Product</h5>
+                <button type="button" class="close" data-dismiss="modal" @click="handleClose">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="clothesName">Clothes Name</label>
+                    <input type="text" class="form-control" id="clothesName" placeholder="Enter Clothes Name" v-model="updatedProduct.clothesName">
+                  </div>
+                  <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="text" class="form-control" id="image" placeholder="Enter Image URL" v-model="updatedProduct.image">
+                  </div>
+                  <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" id="price" placeholder="Enter Price" v-model="updatedProduct.price">
+                  </div>
+                  <div class="form-group">
+                    <label for="category">Category</label>
+                    <input type="text" class="form-control" id="category" placeholder="Enter Category" v-model="updatedProduct.category">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" @click="handleClose">Close</button>
+                <button type="button" class="btn btn-primary" @click="update">Update</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { ref, defineComponent } from 'vue';
+import axios from 'axios';
+
+export default defineComponent({
+  props: {
+    el: {
+      type: Object,
+      required: true,
     },
-    setup(props) {
-      const { currentUser } = useContext(Context);
-      const show = ref(false);
-      const updatedProduct = ref({
-        clothesName: '',
-        price: '',
-        image: '',
-        category: '',
-      });
-  
-      const router = useRouter(); // Initialize the router
-  
-      const handleClose = () => {
-        show.value = false;
+    // setCount: {
+    //   type: Function,
+    //   required: true,
+    // },
+    // count: {
+    //   type: Number,
+    //   required: true,
+    // },
+  },
+  setup(props) {
+    const currentUser = ref(JSON.parse(window.localStorage.getItem('token')));
+    const show = ref(false);
+    const updatedProduct = ref({
+      clothesName: '',
+      price: '',
+      image: '',
+      category: '',
+    });
+
+    const handleClose = () => {
+      show.value = false;
+    };
+
+    const handleShow = () => {
+      show.value = true;
+      updatedProduct.value = {
+        clothesName: props.el.clothesName,
+        price: props.el.price,
+        image: props.el.image,
+        category: props.el.category,
       };
-  
-      const handleShow = () => {
-        show.value = true;
-        updatedProduct.value = {
-          clothesName: props.el.clothesName,
-          price: props.el.price,
-          image: props.el.image,
-          category: props.el.category,
-        };
-      };
-  
-      const handleChange = (e) => {
-        updatedProduct.value = {
-          ...updatedProduct.value,
-          [e.target.name]: e.target.value,
-        };
-      };
-  
-      const update = async () => {
-        try {
-          await axios.put(`http://${process.env.HOST}:${process.env.PORT}/product/${props.el.id}`, updatedProduct.value);
-          props.setCount(props.count + 1);
-          handleClose();
-          router.push('/clothes');
-        } catch (error) {
-          console.error(error);
-        }
-      };
-  
-      const remove = async () => {
-        await axios.delete(`http://${process.env.HOST}:${process.env.PORT}/product/${props.el.id}`);
-        props.setCount(props.count + 1);
-      };
-  
-      const addToCart = async () => {
-        if (!currentUser) {
-          setShowLogin(true);
-        } else {
-          const payload = {
-            product_id: props.el.id,
-            user_id: currentUser.id,
-          };
-          try {
-            const response = await axios.post(`http://${process.env.HOST}:${process.env.PORT}/cart`, payload);
-            console.log('Product added to cart:', response.data);
-          } catch (error) {
-            console.error('Error adding product to cart:', error);
-          }
-        }
-      };
-  
-      return {
-        currentUser,
-        show,
-        updatedProduct,
-        handleClose,
-        handleShow,
-        handleChange,
-        update,
-        remove,
-        addToCart,
-      };
-    },
-  };
-  </script>
-  
-  <style scoped>
-  /* Add your custom styles here */
-  </style>
-  
+    };
+
+    const update = async () => {
+      try {
+        // await axios.put(`http://${process.env.HOST}:${process.env.PORT}/product/${props.el.id}`, updatedProduct.value);
+        // props.setCount(props.count + 1);
+        handleClose();
+        window.location.href ="/";
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const remove = async () => {
+      // await axios.delete(`http://${process.env.HOST}:${process.env.PORT}/product/${props.el.id}`);
+      // props.setCount(props.count + 1);
+    };
+
+   
+
+    return {
+      currentUser,
+      show,
+      updatedProduct,
+      handleClose,
+      handleShow,
+      update,
+      remove,
+    };
+  },
+});
+</script>
+
+<style scoped>
+/* Add your custom styles here */
+</style>

@@ -10,15 +10,15 @@
         />
       </div>
       <div class="clothes-container">
-        <!-- <ClothesDetail v-for="item in data" :el="item" :key="item.id" /> -->
+        <ClothesDetails v-for="item in data" :el="item" :key="item.id" />
       </div>
     </div>
   </template>
   
-  <script>
+  <script lang="ts">
   import axios from "axios";
   import { defineComponent } from "vue";
-//   import ClothesDetail from "./ClothesDetail";
+import ClothesDetails from "./clothesDetails.vue";
   
   export default defineComponent({
     name: "SearchPage",
@@ -38,7 +38,7 @@
         }
   
         axios
-          .get(`http://${process.env.HOST}:${process.env.PORT}/search/${query}`)
+          .get(`http://localhost:3000/products/products`)
           .then((response) => {
             console.log(response);
             this.data = response.data.products;
@@ -47,8 +47,8 @@
       }
     },
     components: {
-    //   ClothesDetail
-    }
+    ClothesDetails
+}
   });
   </script>
   
