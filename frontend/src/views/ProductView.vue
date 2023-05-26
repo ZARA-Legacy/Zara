@@ -102,12 +102,6 @@ export default defineComponent({
         .then((res) => {
           console.log("Product added to cart:", res.data);
           cart.value.push(product);
-         
-          
-          
-            
-           
-           
         })
         .catch((err) => {
           console.error("Failed to add product to cart:", err);
