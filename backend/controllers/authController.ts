@@ -30,14 +30,14 @@ export const login = async (req: Request, res: Response) => {
     const token = jwt.sign(
       {
         id: user.id,
-        firstname: user.firstname,
-        lastname: user.lastname,
         email,
       },
       process.env.TOKEN as Secret
     );
 
-    res.status(200).json({ token, id: user.id, isAdmin: user.isAdmin });
+    const name = `${user.firstname} ${user.lastname}`;
+
+    res.status(200).json({ token, id: user.id, isAdmin: user.isAdmin, name });
   } catch (error) {
     res.status(500).json(error);
   }
@@ -69,14 +69,14 @@ export const signup = async (req: Request, res: Response) => {
     const token = jwt.sign(
       {
         id: newUser.id,
-        firstname: newUser.firstname,
-        lastname: newUser.lastname,
         email,
       },
       process.env.TOKEN as Secret
     );
 
-    res.json({ token, id: newUser.id, isAdmin: newUser.isAdmin });
+    const name = `${newUser.firstname} ${newUser.lastname}`;
+
+    res.json({ token, id: newUser.id, isAdmin: newUser.isAdmin, name });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
