@@ -1,153 +1,28 @@
 <template>
   <div>
     <div class="slider">
-      <nav class="navBar fixed top-0 z-10 w-full">
-        <div class="flex justify-between items-center p-5">
-          <div class="grid gap-1 grid-cols-2">
-            <div>
-              <router-link to="/">
-                <svg
-                  viewBox="0 0 100 80"
-                  width="25"
-                  height="25"
-                  @click="handleToggleSidebar"
-                >
-                  <rect width="70" height="5"></rect>
-                  <rect y="30" width="70" height="5"></rect>
-                  <rect y="60" width="70" height="5"></rect>
-                </svg>
-              </router-link>
-            </div>
-            <a to="/">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Zara_Logo.svg/2560px-Zara_Logo.svg.png" />
-            </a>
-          </div>
-          <div class="left-logos">
-            <div class="recherche">
-              RECHERCHER
-            </div>
-
-            <div class ="connecte">
-             <p v-if="this.user === null">SE CONNECTER</p> 
-            <p v-else>{{ this.user.name }}</p>  
-
-            </div>
-
-            <Router-Link to="./help" class ="help">AIDE</Router-Link>
-
-            <div class ='cart'>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16px"
-                height="16px"
-                fill="currentColor"
-                class="bi bi-bag"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <div v-if="sidebarOpen" class="sidebar">
-        <div class="container">
-          <svg
-            width="20px"
-            height="20px"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            @click="handleToggleSidebar"
-            class="closeSvg"
-            style="width: 17px;
-            height: 17px;"
-          >
-            <g id="Menu / Close_LG">
-              <path
-                id="Vector"
-                d="M21 21L12 12M12 12L3 3M12 12L21.0001 3M12 12L3 21.0001"
-                stroke="#000000"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </g>
-          </svg>
-
-          <div class="elements">
-            <div
-              class="femme"
-              :class="{ active: activeDiv === 0 }"
-              @click="handleDivClick(0); hommeShow = 'femme'"
-            >
-              FEMME
-            </div>
-            <div
-              class="homme"
-              :class="{ active: activeDiv === 1 }"
-              @click="handleDivClick(1); hommeShow = 'homme'"
-            >
-              HOMME
-            </div>
-            <div
-              class="enfants"
-              :class="{ active: activeDiv === 2 }"
-              @click="handleDivClick(2); hommeShow = 'enfants'"
-            >
-              ENFANTS
-            </div>
-            <div
-              class="beaty"
-              :class="{ active: activeDiv === 3 }"
-              @click="handleDivClick(3); hommeShow = 'beauty'"
-            >
-              <div>BEAUTY</div>
-            </div>
-          </div>
-        </div>
-        <div class="container1">
-      <div :class="{ active: hommeShow === 'homme' }">
-        <HommeCategory  v-if="hommeShow === 'homme'" />
-      </div>
-      <div :class="{ active: hommeShow === 'femme' }">
-        <FemmeCategory v-if="hommeShow === 'femme'" />
-      </div>
-      <div :class="{ active: hommeShow === 'enfants' }">
-        <EnfantCategory  v-if="hommeShow === 'enfants'"/>
-      </div>
-    </div>
-      </div>
-
-      <div class="slide">
-      </div>
+      <div class="slide"></div>
       <div class="slide"></div>
       <div class="slide"></div>
       <div class="slide"></div>
       <div class="slide"></div>
     </div>
-
-  
   </div>
 </template>
 
 <script lang="ts">
-import { ref ,defineComponent } from 'vue';
-import HommeCategory from "../components/HommeCategory.vue"
-import FemmeCategory from '../components/FemmeCategory.vue';
-import EnfantCategory from '../components/EnfantCategory.vue';
-const currentUser = JSON.parse(window.localStorage.getItem("token"))
-console.log("from home ",currentUser);
-
+import { ref, defineComponent } from "vue";
+import HommeCategory from "../components/HommeCategory.vue";
+import FemmeCategory from "../components/FemmeCategory.vue";
+import EnfantCategory from "../components/EnfantCategory.vue";
+const currentUser = JSON.parse(window.localStorage.getItem("token"));
+console.log("from home ", currentUser);
 
 export default defineComponent({
   data() {
     return {
       sidebarOpen: false,
-      hommeShow: 'femme',
+      hommeShow: "femme",
       activeDiv: 0,
       user: currentUser,
     };
@@ -158,27 +33,27 @@ export default defineComponent({
     },
     handleToggleSidebar(): void {
       this.sidebarOpen = !this.sidebarOpen;
-      console.log(this.user)
-    }
+      console.log(this.user);
+    },
   },
   components: {
     HommeCategory,
     FemmeCategory,
-    EnfantCategory
-  }
+    EnfantCategory,
+  },
 });
 </script>
 <style scoped>
-.connecte:hover{
+.connecte:hover {
   cursor: pointer;
 }
-.recherche:hover{
+.recherche:hover {
   cursor: pointer;
 }
-.help:hover{
+.help:hover {
   cursor: pointer;
 }
-.cart:hover{
+.cart:hover {
   cursor: pointer;
 }
 .navBar {
@@ -239,19 +114,17 @@ svg {
 }
 
 /* Additional styles for the specific logo image */
-img[src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Zara_Logo.svg/2560px-Zara_Logo.svg.png"] {
+img[src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Zara_Logo.svg/2560px-Zara_Logo.svg.png"]
+{
   max-width: 100%;
   height: auto;
 }
-
 
 .sidebar {
   position: fixed;
   top: 0;
   z-index: 10;
 }
-
-
 
 img {
   width: 200px;
@@ -299,15 +172,14 @@ img {
   top: 40px;
   left: -200px;
   background: none;
-  border:none;
+  border: none;
   box-shadow: none;
-  
 }
 
 .closeSvg {
   position: relative;
   top: -147px;
-  left:-300px;
+  left: -300px;
   opacity: 0.9;
 }
 
@@ -335,7 +207,7 @@ img {
 }
 
 .homme.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: calc(43% - 1px); /* Adjust this value to control the width */
@@ -354,7 +226,7 @@ img {
 }
 
 .femme.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: calc(40% - 1px); /* Adjust this value to control the width */
@@ -373,7 +245,7 @@ img {
 }
 
 .enfants.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: calc(40% - 1px); /* Adjust this value to control the width */
@@ -392,7 +264,7 @@ img {
 
 .slider {
   overflow: hidden;
-  width:100%;
+  width: 100%;
   height: 100vh;
   position: relative;
 }
@@ -409,22 +281,22 @@ img {
 }
 
 .slider .slide:nth-child(3) {
-  background-image: url('https://static.zara.net/photos///contents/mkt/spots/ss23-north-beauty-new/subhome-xmedia-16//w/1920/IMAGE-landscape-default-fill-d06d0c41-fb7d-423f-96be-d9a4510cdab8-default_0.jpg?ts=1682077253385');
+  background-image: url("https://static.zara.net/photos///contents/mkt/spots/ss23-north-beauty-new/subhome-xmedia-16//w/1920/IMAGE-landscape-default-fill-d06d0c41-fb7d-423f-96be-d9a4510cdab8-default_0.jpg?ts=1682077253385");
   animation-delay: -5s;
 }
 
 .slider .slide:nth-child(4) {
-  background-image: url('https://static.zara.net/photos///contents/mkt/spots/ss23-north-kids-summer-camp/subhome-xmedia-19//w/1920/IMAGE-landscape-default-fill-56a3ce33-fa40-4027-8d3e-df9b1f65c531-default_0.jpg?ts=1683615240598');
+  background-image: url("https://static.zara.net/photos///contents/mkt/spots/ss23-north-kids-summer-camp/subhome-xmedia-19//w/1920/IMAGE-landscape-default-fill-56a3ce33-fa40-4027-8d3e-df9b1f65c531-default_0.jpg?ts=1683615240598");
   animation-delay: -7.5s;
 }
 
 .slider .slide:nth-child(5) {
-  background-image: url('https://static.zara.net/photos///contents/mkt/spots/ss23-north-man-new/subhome-xmedia-19-2//w/1920/IMAGE-landscape-fill-9efbc54b-6ef8-4aa7-a8c1-78897dbbbf1d-default_0.jpg?ts=1683462393703');
+  background-image: url("https://static.zara.net/photos///contents/mkt/spots/ss23-north-man-new/subhome-xmedia-19-2//w/1920/IMAGE-landscape-fill-9efbc54b-6ef8-4aa7-a8c1-78897dbbbf1d-default_0.jpg?ts=1683462393703");
   animation-delay: -10s;
 }
 
 .slider .slide:nth-child(6) {
-  background-image: url('https://static.zara.net/photos///contents/mkt/spots/ss23-north-woman-new/subhome-xmedia-19//w/1920/IMAGE-landscape-default-fill-c34c147e-b13b-4325-ba47-694c24f30ad9-default_0.jpg?ts=1682077191023');
+  background-image: url("https://static.zara.net/photos///contents/mkt/spots/ss23-north-woman-new/subhome-xmedia-19//w/1920/IMAGE-landscape-default-fill-c34c147e-b13b-4325-ba47-694c24f30ad9-default_0.jpg?ts=1682077191023");
   animation-delay: -12.5s;
 }
 
@@ -453,7 +325,6 @@ img {
   margin-top: 150px;
   position: relative;
   left: 2px;
- 
 }
 
 .active {
