@@ -98,6 +98,8 @@ export default defineComponent({
 }
 .admin-dashboard {
   font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  margin: 2rem;
+  margin-top: 9rem;
 }
 
 .user-table {

@@ -27,7 +27,7 @@
 
         <div class="connecte">
           <RouterLink to="/login" v-if="this.user === null">LOGIN</RouterLink>
-          <RouterLink to=`/profile` v-else>{{ this.user.name }}</RouterLink>
+          <RouterLink to="/profile" v-else>{{ this.user.name }}</RouterLink>
         </div>
 
         <RouterLink to="./help" class="help">HELP</RouterLink>
