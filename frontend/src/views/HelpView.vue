@@ -19,7 +19,7 @@
   
       const fetchAnswer = async () => {
         try {
-          const response = await axios.get(`http://localhost:3000/help/one/${typedQuestion.value}`);
+          const response = await axios.get(`http://localhost:3000/question/one/${typedQuestion.value}`);
           answer.value = response.data.answer;
           console.log(typedQuestion,'typedQuestion')
           console.log(answer,'answer')
