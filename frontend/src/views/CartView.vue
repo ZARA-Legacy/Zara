@@ -48,6 +48,9 @@
           >
             Remove from Cart
           </button>
+          <p class="card-text">Quantity: {{ e.quantity }}</p>
+                <button @click="incrementQuantity(e)" class="btn">+</button>
+                <button @click="decrementQuantity(e)" class="btn btn-sm btn-outline-primary">-</button>
         </div>
       </div>
     </div>
@@ -172,8 +175,9 @@
         try {
           const res = await axios.get(`http://localhost:3000/cart/one/${currentUser.id}`);
           cart.value = res.data;
-          console.log(cart.value)
-          console.log(currentUser.id,'currentUser.id')
+          // console.log(cart.value)
+          // console.log(currentUser.id,'currentUser.id')
+          console.log(res.data,'ooo')
         } catch (error) {
           console.error('Error fetching cart:', error,'hedhi loula');
         }
@@ -194,10 +198,10 @@
         }
       };
   
-      const incrementQuantity = (item: Product) => {
+      const incrementQuantity = (quantity: number) => {
         // Increment quantity logic
-        item.quantity++;
-        updateQuantity(item);
+        quantity++;
+        // updateQuantity();
       };
   
       const decrementQuantity = (item: Product) => {
