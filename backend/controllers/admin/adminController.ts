@@ -22,13 +22,14 @@ export const getOneUser = async (req: Request, res: Response) => {
   }
 };
 
-export const makeAdmin = async (req: Request, res: Response) => {
+export const updateAdmin = async (req: Request, res: Response) => {
   const id = req.params.id;
+  const { admin } = req.body;
   try {
     const user = await User.findOne({ where: { id } });
 
     user?.set({
-      isAdmin: true,
+      isAdmin: admin,
     });
 
     res.status(200).send("User is now an admin");
