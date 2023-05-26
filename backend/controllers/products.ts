@@ -36,7 +36,7 @@ const controller = {
       const products = await Model.findAll({
         where: {
           name: {
-            [Sequelize.Op.like]: name,
+            [Sequelize.Op.like]: `%${name}%`,
           },
         },
       });
