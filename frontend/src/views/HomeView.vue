@@ -27,7 +27,11 @@
               RECHERCHER
             </div>
 
-            <div class ="connecte">SE CONNECTER</div>
+            <div class ="connecte">
+             <p v-if="this.user === null">SE CONNECTER</p> 
+            <p v-else>{{ this.user.name }}</p>  
+
+            </div>
 
             <Router-Link to="./help" class ="help">AIDE</Router-Link>
 
@@ -134,17 +138,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { ref ,defineComponent } from 'vue';
 import HommeCategory from "../components/HommeCategory.vue"
 import FemmeCategory from '../components/FemmeCategory.vue';
 import EnfantCategory from '../components/EnfantCategory.vue';
+const currentUser = JSON.parse(window.localStorage.getItem("token"))
+console.log("from home ",currentUser);
+
 
 export default defineComponent({
   data() {
     return {
       sidebarOpen: false,
       hommeShow: 'femme',
-      activeDiv: 0
+      activeDiv: 0,
+      user: currentUser,
     };
   },
   methods: {
@@ -153,6 +161,7 @@ export default defineComponent({
     },
     handleToggleSidebar(): void {
       this.sidebarOpen = !this.sidebarOpen;
+      console.log(this.user)
     }
   },
   components: {
