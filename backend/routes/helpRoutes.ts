@@ -3,7 +3,7 @@ import HelpController from "../controllers/helpController";
 
 const routeHelp = express.Router();
 
-routeHelp.get("/question", HelpController.getAllHelp);
+routeHelp.get("/help", HelpController.getAllHelp);
 routeHelp.get("/one/:question", HelpController.getHelpByQuestion);
 routeHelp.post("/", HelpController.createHelp);
 
