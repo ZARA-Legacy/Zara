@@ -37,7 +37,7 @@ export const login = async (req: Request, res: Response) => {
       process.env.TOKEN as Secret
     );
 
-    res.status(200).json({ token, id: user.id });
+    res.status(200).json({ token, id: user.id, isAdmin: user.isAdmin });
   } catch (error) {
     res.status(500).json(error);
   }
@@ -50,7 +50,7 @@ export const signup = async (req: Request, res: Response) => {
     const user = await User.findOne({
       where: {
         email: email,
-      }, 
+      },
     });
 
     if (user) {
@@ -76,7 +76,7 @@ export const signup = async (req: Request, res: Response) => {
       process.env.TOKEN as Secret
     );
 
-    res.json({ token, id: newUser.id });
+    res.json({ token, id: newUser.id, isAdmin: newUser.isAdmin });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
