@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center p-5">
       <div class="grid gap-1 grid-cols-2">
         <div>
-          <RouterLink to="/">
+          <div>
             <svg
               viewBox="0 0 100 80"
               width="25"
@@ -14,13 +14,13 @@
               <rect y="30" width="70" height="5"></rect>
               <rect y="60" width="70" height="5"></rect>
             </svg>
-          </RouterLink>
+          </div>
         </div>
-        <a to="/">
+        <RouterLink to="/">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Zara_Logo.svg/2560px-Zara_Logo.svg.png"
           />
-        </a>
+        </RouterLink>
       </div>
       <div class="left-logos">
         <RouterLink to="/search" class="recherche">SEARCH</RouterLink>
@@ -30,7 +30,7 @@
           <RouterLink to="/profile" v-else>{{ this.user.name }}</RouterLink>
         </div>
 
-        <RouterLink to="./help" class="help">HELP</RouterLink>
+        <RouterLink to="/help" class="help">HELP</RouterLink>
 
         <div class="cart">
           <svg
@@ -62,16 +62,14 @@
         class="closeSvg"
         style="width: 17px; height: 17px"
       >
-        <g id="Menu / Close_LG">
-          <path
-            id="Vector"
-            d="M21 21L12 12M12 12L3 3M12 12L21.0001 3M12 12L3 21.0001"
-            stroke="#000000"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </g>
+        <path
+          id="Vector"
+          d="M21 21L12 12M12 12L3 3M12 12L21.0001 3M12 12L3 21.0001"
+          stroke="#000000"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
       </svg>
 
       <div class="elements">
@@ -80,7 +78,7 @@
           :class="{ active: activeDiv === 0 }"
           @click="
             handleDivClick(0);
-            hommeShow = 'femme';
+            this.hommeShow = 'femme';
           "
         >
           WOMEN
@@ -90,7 +88,7 @@
           :class="{ active: activeDiv === 1 }"
           @click="
             handleDivClick(1);
-            hommeShow = 'homme';
+            this.hommeShow = 'homme';
           "
         >
           MEN
@@ -100,7 +98,7 @@
           :class="{ active: activeDiv === 2 }"
           @click="
             handleDivClick(2);
-            hommeShow = 'enfants';
+            this.hommeShow = 'enfants';
           "
         >
           KIDS
@@ -110,7 +108,7 @@
           :class="{ active: activeDiv === 3 }"
           @click="
             handleDivClick(3);
-            hommeShow = 'beauty';
+            this.hommeShow = 'beauty';
           "
         >
           <div>BEAUTY</div>
@@ -138,13 +136,12 @@ import HommeCategory from "./HommeCategory.vue";
 import FemmeCategory from "./FemmeCategory.vue";
 import EnfantCategory from "./EnfantCategory.vue";
 const currentUser = JSON.parse(window.localStorage.getItem("token"));
-console.log("from home ", currentUser);
 
 export default defineComponent({
   data() {
     return {
       sidebarOpen: false,
-      hommeShow: "femme",
+      hommeShow: "",
       activeDiv: 0,
       user: currentUser,
     };
@@ -245,7 +242,7 @@ img[src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Zara_Logo.svg
 .sidebar {
   position: fixed;
   top: 0;
-  z-index: 10;
+  z-index: 9999;
 }
 
 img {
@@ -276,7 +273,7 @@ img {
   top: 0;
   left: 0;
   height: 100vh;
-  width: 29.29vw;
+  width: 33vw;
   background-color: white;
   opacity: 0.98;
 }
@@ -291,8 +288,6 @@ img {
 
 .container {
   position: absolute;
-  top: 40px;
-  left: -200px;
   background: none;
   border: none;
   box-shadow: none;
@@ -300,8 +295,8 @@ img {
 
 .closeSvg {
   position: relative;
-  top: -147px;
-  left: -300px;
+  top: 45px;
+  left: 35px;
   opacity: 0.9;
 }
 
@@ -310,9 +305,8 @@ img {
   flex-direction: row;
   gap: 20px;
   position: relative;
-  top: -100px;
-  margin-left: -300px;
   font-size: 12px;
+  top: 4.6rem;
 }
 
 .elements:hover {
@@ -336,6 +330,12 @@ img {
   width: 8px; /* Adjust this value to control the thickness */
   height: 1%; /* Adjust this value to control the height */
   background-color: #000;
+}
+
+.femme {
+  color: black;
+  top: 0;
+  left: 0;
 }
 
 .femme:hover {
