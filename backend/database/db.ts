@@ -17,7 +17,7 @@ export default [
         "price": 999,
         "quantity": 50 ,
         "gender": "MEN",
-        "category": "shirt",
+        "category": "shirts",
         "description": "We work with monitoring programmes to ensure compliance with safety, health and quality standards for our products"
       },
       {
@@ -27,7 +27,7 @@ export default [
         "price": 2990,
         "quantity": 150,
         "gender": "MEN",
-        "category": "shirt",
+        "category": "shirts",
         "description": "We work with monitoring programmes to ensure compliance with safety, health and quality standards for our products"
       },
       {
@@ -76,7 +76,7 @@ export default [
         "price": 3990,
         "quantity": 180,
         "gender": "MEN",
-        "category": "shirt",
+        "category": "shirts",
         "description": "We work with monitoring programmes to ensure compliance with safety, health and quality standards for our products"
       },
       {
