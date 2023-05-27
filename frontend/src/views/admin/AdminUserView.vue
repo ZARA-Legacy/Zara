@@ -78,6 +78,7 @@ export default defineComponent({
       axios
         .put(`http://localhost:3000/admin/users/${userId}`, {
           isAdmin: admin,
+          admin,
         })
         .then(() => {
           const user = this.users.find((user) => user.id === userId);
