@@ -1,9 +1,7 @@
 import { Request, Response } from "express";
 import User from "../../models/User";
 import Product from "../../models/Product";
-import  Sequelize from "sequelize"
-
-
+import Sequelize from "sequelize";
 
 // Users
 
@@ -38,6 +36,8 @@ export const updateAdmin = async (req: Request, res: Response) => {
       isAdmin: admin,
     });
 
+    await user?.save();
+
     res.status(200).send("User is now an admin");
   } catch (error) {
     console.log(error);
@@ -69,7 +69,8 @@ export const getAllProducts = async (req: Request, res: Response) => {
 };
 export const createProduct = async (req: Request, res: Response) => {
   try {
-    const { name, image, price, quantity, gender, category, description } = req.body;
+    const { name, image, price, quantity, gender, category, description } =
+      req.body;
     const product = await Product.create({
       name,
       image,
@@ -90,8 +91,7 @@ export const getOneProduct = async (req: Request, res: Response) => {
   try {
     const product = await Product.findOne({ where: { id } });
     res.status(200).json(product);
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
     res.status(500).json(error);
   }
@@ -110,11 +110,12 @@ export const deleteProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
   const id = req.params.id;
   try {
-    const { name, image, price, quantity, gender, category, description } = req.body;
+    const { name, image, price, quantity, gender, category, description } =
+      req.body;
     const product = await Product.findOne({ where: { id } });
 
     if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
+      return res.status(404).json({ error: "Product not found" });
     }
 
     await product.update({
@@ -137,10 +138,12 @@ export const updateProduct = async (req: Request, res: Response) => {
 export const searchProductByName = async (req, res) => {
   const { name } = req.query;
   try {
-    const products = await Product.findAll({ where: { name: { [Sequelize.Op.like]: `%${name}%` } } });
+    const products = await Product.findAll({
+      where: { name: { [Sequelize.Op.like]: `%${name}%` } },
+    });
 
     if (products.length === 0) {
-      return res.status(404).json({ error: 'No products found' });
+      return res.status(404).json({ error: "No products found" });
     }
 
     res.status(200).json(products);
