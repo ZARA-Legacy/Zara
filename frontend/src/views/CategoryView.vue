@@ -75,7 +75,7 @@ export default defineComponent({
 
     const fetchData = () => {
       axios
-        .get(`http://localhost:3000/products/${gender}/${category}`)
+        .get(`http://localhost:3000/products/${gender.value}/${category.value}`)
         .then((res) => {
           data.value = res.data;
           console.log(data.value);

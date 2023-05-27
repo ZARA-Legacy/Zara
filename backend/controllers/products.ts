@@ -52,7 +52,7 @@ const controller = {
   getProductByCategory: async (req: Request, res: Response) => {
     const { gender, category } = req.params;
     try {
-      const products = Product.findAll({
+      const products = await Product.findAll({
         where: {
           gender: {
             [Sequelize.Op.like]: `%${gender}%`,
