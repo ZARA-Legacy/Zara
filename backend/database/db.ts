@@ -51,7 +51,6 @@ export default [
         "description": "We work with monitoring programmes to ensure compliance with safety, health and quality standards for our products"
       },
       {
-       
         "name": "MULTICOLOURED SNEAKERS",
         "image": "https://static.zara.net/photos///2022/V/1/2/p/2240/920/203/2/w/333/2240920203_6_1_1.jpg?ts=1644485077528",
         "price": 2999,
