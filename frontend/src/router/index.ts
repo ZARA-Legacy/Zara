@@ -7,6 +7,7 @@ import ConfirmEmail from "../views/ConfirmEmail.vue";
 import HomeView from "../views/HomeView.vue";
 import ManageUsers from "../views/admin/AdminUserView.vue";
 import HelpView from "../views/HelpView.vue";
+import  ManageProds from "../views/admin/AdminProductView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -27,6 +28,7 @@ const router = createRouter({
       name: "admin",
       children: [
         { path: "users", name: "admin-users", component: ManageUsers },
+        { path: "prods", name: "admin-prods", component: ManageProds },
       ],
     },
   ],

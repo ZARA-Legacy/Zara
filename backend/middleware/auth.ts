@@ -5,7 +5,8 @@ export const authorize = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { isAdmin } = req.body;
+  const { isAdmin } = req.params;
+  console.log(isAdmin);
   try {
     if (isAdmin) next();
     else res.status(401).send("Unauthorized");

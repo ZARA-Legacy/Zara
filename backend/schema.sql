@@ -101,3 +101,6 @@ COLLATE = utf8mb4_0900_ai_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO `zara`.`users` (`firstname`, `lastname`, `email`, `password`, `emailConfirmed`, `isAdmin`) 
+VALUES ('admin', 'admin', 'admin@gmail.com', 'admin', 1, 1);
