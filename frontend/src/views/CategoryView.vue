@@ -49,7 +49,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, ref, onMounted, watch } from "vue";
+import { useRouter } from "vue-router";
 import axios from "axios";
 
 import swal from "sweetalert";
@@ -68,14 +69,15 @@ export default defineComponent({
   setup() {
     const currentUser = JSON.parse(window.localStorage.getItem("token"));
 
-    const gender = ref(window.location.pathname.split("/")[2]);
-    const category = ref(window.location.pathname.split("/")[3]);
     const data = ref<Product[]>([]);
     const cart = ref<Product[]>([]);
+    const route = useRouter();
 
     const fetchData = () => {
+      const gender = window.location.pathname.split("/")[2];
+      const category = window.location.pathname.split("/")[3];
       axios
-        .get(`http://localhost:3000/products/${gender.value}/${category.value}`)
+        .get(`http://localhost:3000/products/${gender}/${category}`)
         .then((res) => {
           data.value = res.data;
           console.log(data.value);
@@ -114,11 +116,10 @@ export default defineComponent({
     };
 
     return {
-      gender,
-      category,
       data,
       cart,
       addToCart,
+      fetchData,
     };
   },
 });
