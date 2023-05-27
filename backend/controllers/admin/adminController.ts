@@ -136,7 +136,7 @@ export const updateProduct = async (req: Request, res: Response) => {
 };
 
 export const searchProductByName = async (req, res) => {
-  const { name } = req.query;
+  const { name } = req.params;
   try {
     const products = await Product.findAll({
       where: { name: { [Sequelize.Op.like]: `%${name}%` } },

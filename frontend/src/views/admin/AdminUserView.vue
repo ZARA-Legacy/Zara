@@ -39,7 +39,7 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 const currentUser = JSON.parse(window.localStorage.getItem("token"));
-
+// console.log(currentUser);
 interface User {
   id: number;
   name: string;
@@ -56,7 +56,7 @@ export default defineComponent({
   methods: {
     fetchUsers() {
       axios
-        .get("http://localhost:3000/admin/users/all")
+        .get(`http://localhost:3000/admin/users/all/${currentUser.isAdmin}`)
         .then((response) => {
           this.users = response.data;
         })
@@ -66,7 +66,7 @@ export default defineComponent({
     },
     deleteUser(userId: number) {
       axios
-        .delete(`http://localhost:3000/admin/users/${userId}`)
+        .delete(`http://localhost:3000/admin/users/${userId}/${currentUser.isAdmin}`)
         .then(() => {
           this.users = this.users.filter((user) => user.id !== userId);
         })
@@ -76,7 +76,7 @@ export default defineComponent({
     },
     updateAdmin(userId: number, admin: Boolean) {
       axios
-        .put(`http://localhost:3000/admin/users/${userId}`, {
+        .put(`http://localhost:3000/admin/users/${userId}/${currentUser.isAdmin}`, {
           isAdmin: admin,
           admin,
         })
