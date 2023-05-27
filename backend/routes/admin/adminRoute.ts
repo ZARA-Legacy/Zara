@@ -18,12 +18,12 @@ const router: Router = express.Router();
 
 //Users
 
-router.get("/users/all", authorize, getAllUsers);
-router.get("/users/one/:id", authorize, getOneUser);
+router.get("/users/all/:isAdmin", authorize, getAllUsers);
+router.get("/users/one/:id/:isAdmin", authorize, getOneUser);
 
-router.put("/users/:id", authorize, updateAdmin);
+router.put("/users/:id/:isAdmin", authorize, updateAdmin);
 
-router.delete("/users/:id", authorize, deleteUser);
+router.delete("/users/:id/:isAdmin", authorize, deleteUser);
 //Products
 
 router.get("/products/all", getAllProducts);
