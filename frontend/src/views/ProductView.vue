@@ -53,7 +53,6 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
 import axios from "axios";
-import ProductItem from "../components/ProductItem.vue";
 import swal from 'sweetalert';
 interface Product {
   id: number;
