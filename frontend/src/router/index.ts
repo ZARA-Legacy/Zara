@@ -8,7 +8,6 @@ import HomeView from "../views/HomeView.vue";
 import ManageUsers from "../views/admin/AdminUserView.vue";
 import HelpView from "../views/HelpView.vue";
 
-
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -17,7 +16,11 @@ const router = createRouter({
     { path: "/signup", name: "signup", component: SignupView },
     { path: "/confirm-email/:id", name: "confEmail", component: ConfirmEmail },
     { path: "/cart", name: "cart", component: CartView },
-    { path: "/prod", name: "product", component: ProductView },
+    {
+      path: "/prod/:gender/:category",
+      name: "product",
+      component: ProductView,
+    },
     { path: "/help", name: "help", component: HelpView },
     {
       path: "/admin",

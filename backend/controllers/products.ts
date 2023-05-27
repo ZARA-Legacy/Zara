@@ -1,37 +1,38 @@
-import { Request, Response } from "express"
-import Model from "../models/Product"
-import  Sequelize from "sequelize"
+import { Request, Response } from "express";
+import Model from "../models/Product";
+import Sequelize from "sequelize";
+import Product from "../models/Product";
 const controller = {
   getGenderWomen: function (req: Request, res: Response) {
     Model.findAll({ where: { gender: "women" } })
       .then((results) => res.json(results))
-      .catch((err) => res.status(500).send(err))
+      .catch((err) => res.status(500).send(err));
   },
   getGenderMen: function (req: Request, res: Response) {
     Model.findAll({ where: { gender: "men" } })
       .then((results) => res.json(results))
-      .catch((err) => res.status(500).send(err))
+      .catch((err) => res.status(500).send(err));
   },
   getAllProduct: function (req: Request, res: Response) {
     Model.findAll()
       .then((results) => res.json(results))
-      .catch((err) => res.status(500).send(err))
+      .catch((err) => res.status(500).send(err));
   },
   updateOneProduct: function (req: Request, res: Response) {
-    const id = req.params.id
-    const update = req.body
+    const id = req.params.id;
+    const update = req.body;
     Model.update(update, { where: { id: id } })
       .then((result) => {
         if (result[0] === 0) {
-          res.status(404).json({ message: "Product not found" })
+          res.status(404).json({ message: "Product not found" });
         } else {
-          res.status(200).json({ message: "Product updated successfully" })
+          res.status(200).json({ message: "Product updated successfully" });
         }
       })
-      .catch((err) => res.status(500).send(err))
+      .catch((err) => res.status(500).send(err));
   },
-  search: async (req:Request, res: Response)=>{
-    const {name} = req.params;
+  search: async (req: Request, res: Response) => {
+    const { name } = req.params;
     try {
       const products = await Model.findAll({
         where: {
@@ -40,14 +41,33 @@ const controller = {
           },
         },
       });
-  
+
       res.status(200).json(products);
     } catch (error) {
       console.log(error);
-      res.status(500).json(error)
+      res.status(500).json(error);
     }
+  },
 
-  }
-}
+  getProductByCategory: async (req: Request, res: Response) => {
+    const { gender, category } = req.params;
+    try {
+      const products = Product.findAll({
+        where: {
+          gender: {
+            [Sequelize.Op.like]: `%${gender}%`,
+          },
+          category: {
+            [Sequelize.Op.like]: `%${category}%`,
+          },
+        },
+      });
+      res.status(200).json(products);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
+  },
+};
 
-export default controller 
+export default controller;

@@ -44,6 +44,7 @@ interface User {
   id: number;
   name: string;
   isAdmin: boolean;
+  emailConfirmed: boolean;
 }
 
 export default defineComponent({
