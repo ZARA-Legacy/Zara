@@ -18,23 +18,19 @@ const router: Router = express.Router();
 
 //Users
 
-router.get("/users/all", getAllUsers);
-router.get("/users/one/:id", getOneUser);
+router.get("/users/all", authorize, getAllUsers);
+router.get("/users/one/:id", authorize, getOneUser);
 
-router.put("/users/:id", updateAdmin);
+router.put("/users/:id", authorize, updateAdmin);
 
-
-router.delete("/users/:id", deleteUser);
+router.delete("/users/:id", authorize, deleteUser);
 //Products
 
 router.get("/products/all", getAllProducts);
-router.get("/products/one/:id",getOneProduct)
-router.get("/products/:name",searchProductByName)
-router.post("/products/add",createProduct)
+router.get("/products/one/:id", getOneProduct);
+router.get("/products/:name", searchProductByName);
+router.post("/products/add", createProduct);
 router.delete("/products/:id", deleteProduct);
 router.put("/products/:id", updateProduct);
-
-
-
 
 export default router;
