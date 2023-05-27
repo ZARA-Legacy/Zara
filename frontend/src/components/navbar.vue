@@ -53,8 +53,6 @@
   <div v-if="sidebarOpen" class="sidebar">
     <div class="container">
       <svg
-        width="20px"
-        height="20px"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -243,6 +241,8 @@ img[src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Zara_Logo.svg
   position: fixed;
   top: 0;
   z-index: 9999;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 img {
