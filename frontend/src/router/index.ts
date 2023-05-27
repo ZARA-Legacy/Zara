@@ -27,6 +27,7 @@ const router = createRouter({
       name: "admin",
       children: [
         { path: "users", name: "admin-users", component: ManageUsers },
+        { path: "users", name: "admin-users", component: ManageUsers },
       ],
     },
   ],
