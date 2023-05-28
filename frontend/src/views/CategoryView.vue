@@ -111,7 +111,7 @@ export default defineComponent({
         text: "The item has been added to your cart!",
         icon: "success",
         timer: 1100,
-        buttons: false,
+        buttons: [false],
       });
     };
 

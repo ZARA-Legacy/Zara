@@ -41,8 +41,6 @@
           >
             Add to Cart
             <!-- <div v-if="showAlert" class="alert success"> -->
-             
-      
           </button>
         </div>
       </div>
@@ -53,7 +51,7 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
 import axios from "axios";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 interface Product {
   id: number;
   name: string;
@@ -91,43 +89,42 @@ export default defineComponent({
     });
 
     const addToCart = (product: Product) => {
-  const newCart = {
-    user_id: currentUser.id,
-    products_id: product.id,
-  };
+      const newCart = {
+        user_id: currentUser.id,
+        products_id: product.id,
+      };
 
-  // Check if the product is already in the cart
-  const isProductInCart = cart.value.some((item) => item.id === product.id);
-  if (isProductInCart) {
-    swal({
-      title: 'Item Already in Cart',
-      text: 'If you want to update the quantity, please check your cart.',
-      icon: 'error',
-      timer: 3000,
-      buttons: false,
-    });
-    return; // Exit the function if the product is already in the cart
-  }
+      // Check if the product is already in the cart
+      const isProductInCart = cart.value.some((item) => item.id === product.id);
+      if (isProductInCart) {
+        swal({
+          title: "Item Already in Cart",
+          text: "If you want to update the quantity, please check your cart.",
+          icon: "error",
+          timer: 3000,
+          buttons: false,
+        });
+        return; // Exit the function if the product is already in the cart
+      }
 
-  axios
-    .post("http://127.0.0.1:3000/cart/cart", newCart)
-    .then((res) => {
-      console.log("Product added to cart:", res.data);
-      cart.value.push(product);
-    })
-    .catch((err) => {
-      console.error("Failed to add product to cart:", err);
-    });
+      axios
+        .post("http://127.0.0.1:3000/cart/cart", newCart)
+        .then((res) => {
+          console.log("Product added to cart:", res.data);
+          cart.value.push(product);
+        })
+        .catch((err) => {
+          console.error("Failed to add product to cart:", err);
+        });
 
-  swal({
-    title: 'Item Added',
-    text: 'The item has been added to your cart!',
-    icon: 'success',
-    timer: 1100,
-    buttons: false,
-  });
-};
-
+      swal({
+        title: "Item Added",
+        text: "The item has been added to your cart!",
+        icon: "success",
+        timer: 1100,
+        buttons: false,
+      });
+    };
 
     return {
       gender,
@@ -135,7 +132,6 @@ export default defineComponent({
       data,
       cart,
       addToCart,
-      
     };
   },
 });
