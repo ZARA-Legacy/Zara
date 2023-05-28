@@ -55,6 +55,7 @@
 <script lang="ts">
 import axios from "axios";
 import { defineComponent, Ref, ref } from "vue";
+import swal from 'sweetalert';
 
 export default defineComponent({
   data() {
@@ -98,14 +99,23 @@ export default defineComponent({
           }
         );
         console.log(emailSent)
-        alert("Your account has been created");
-        window.localStorage.setItem("token", JSON.stringify(response.data));
+        swal({
+      title: 'Registred successefuly',
+      text: 'Now you can logint.',
+      icon: 'error',
+      timer: 3000,
+      buttons: false,
+    });        window.localStorage.setItem("token", JSON.stringify(response.data));
         window.location.href = "/";
       } catch (error) {
         console.log(error);
-        alert(
-          "An error occurred while signing up. Please check your details and try again."
-        );
+        swal({
+      title: 'An error occurred while signing up.',
+      text: ' Please check your details and try again.',
+      icon: 'error',
+      timer: 3000,
+      buttons: false,
+    });
       }
     },
   },
