@@ -48,6 +48,7 @@
 import axios from "axios";
 // import navbar from "../components/navbar.vue"
 import { defineComponent, ref } from "vue";
+import swal from 'sweetalert';
 
 export default defineComponent({
   name: "Login",
@@ -64,11 +65,23 @@ export default defineComponent({
           email: email.value,
           password: password.value,
         });// const currentUser = JSON.parse(window.localStorage.getItem("token"))
-        alert("logged in");
+        swal({
+    title: 'logged in',
+    text: 'Welcome to our website',
+    icon: 'success',
+    timer: 1100,
+    buttons: false,
+  });
         window.localStorage.setItem("token", JSON.stringify(response.data));
         window.location.href = "/";
       } catch (error) {
-        alert("check your password or email");
+        swal({
+    title: 'Something went wrong',
+    text: 'check your password or email',
+    icon: 'error',
+    timer: 1100,
+    buttons: false,
+  });
       }
     };
 
