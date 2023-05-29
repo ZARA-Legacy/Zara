@@ -23,17 +23,17 @@
         </RouterLink>
       </div>
       <div class="left-logos">
-        <RouterLink to="/search" class="recherche">SEARCH</RouterLink>
+        <RouterLink  to="/search" class="recherche black">SEARCH</RouterLink>
 
         <div class="connecte">
-          <RouterLink to="/login" v-if="this.user === null">LOGIN</RouterLink>
-          <RouterLink to="/profile" v-else>{{ this.user.name }}</RouterLink>
+          <RouterLink class="black" to="/login" v-if="this.user === null">LOGIN</RouterLink>
+          <RouterLink class="back" to="/profile" v-else>{{ this.user.name }}</RouterLink>
         </div>
 
-        <RouterLink to="/help" class="help">HELP</RouterLink>
+        <RouterLink  to="/help" class="help black">HELP</RouterLink>
 
         <div class="cart">
-          <RouterLink to="/cart">
+          <RouterLink class="black" to="/cart">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16px"
@@ -161,7 +161,10 @@ export default defineComponent({
   },
 });
 </script>
-<style scoped>
+<style >
+  a.black{
+    color : black ;
+  }
 .connecte:hover {
   cursor: pointer;
 }

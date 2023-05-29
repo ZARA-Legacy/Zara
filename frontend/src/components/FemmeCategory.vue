@@ -1,7 +1,7 @@
 <template>
   <div class="container1">
     <div v-for="(category, index) in this.womenCategories" :key="index">
-      <RouterLink :to="`/prod/women/${category}`">{{ category }}</RouterLink>
+      <RouterLink class="black" :to="`/prod/women/${category}`">{{ category }}</RouterLink>
     </div>
   </div>
 </template>

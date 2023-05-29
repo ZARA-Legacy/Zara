@@ -30,7 +30,7 @@ export default {
 <template>
   <div class="container1">
     <div v-for="(category, index) in this.menCategories" :key="index">
-      <RouterLink :to="`/prod/men/${category}`">{{ category }}</RouterLink>
+      <RouterLink class="black" :to="`/prod/men/${category}`">{{ category }}</RouterLink>
     </div>
   </div>
 </template>
