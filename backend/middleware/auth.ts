@@ -5,8 +5,7 @@ export const authorize = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { isAdmin } = req.params;
-  console.log(isAdmin);
+  const { isAdmin } = JSON.parse(req.params.isAdmin);
   try {
     if (isAdmin) next();
     else res.status(401).send("Unauthorized");
@@ -15,3 +14,5 @@ export const authorize = async (
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const authenticate = async (req: Request, res: Response, next: NextFunction) => {}

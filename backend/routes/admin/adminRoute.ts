@@ -1,7 +1,6 @@
 import express, { Router } from "express";
 import {
   getAllUsers,
-  getOneUser,
   updateAdmin,
   deleteUser,
   getAllProducts,
@@ -19,7 +18,6 @@ const router: Router = express.Router();
 //Users
 
 router.get("/users/all/:isAdmin", authorize, getAllUsers);
-router.get("/users/one/:id/:isAdmin", authorize, getOneUser);
 
 router.put("/users/:id/:isAdmin", authorize, updateAdmin);
 

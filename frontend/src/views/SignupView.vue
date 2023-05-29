@@ -55,7 +55,7 @@
 <script lang="ts">
 import axios from "axios";
 import { defineComponent, Ref, ref } from "vue";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 export default defineComponent({
   data() {
@@ -85,8 +85,7 @@ export default defineComponent({
           }
         );
 
-        console.log(response);
-        const emailSent = await axios.post(
+        await axios.post(
           "http://localhost:3000/api/email",
           {
             name: `${this.lastname} ${this.firstname}`,
@@ -98,24 +97,23 @@ export default defineComponent({
             },
           }
         );
-        console.log(emailSent)
-        swal({
-      title: 'Registred successefuly',
-      text: 'Now you can logint.',
-      icon: 'error',
-      timer: 3000,
-      buttons: false,
-    });        window.localStorage.setItem("token", JSON.stringify(response.data));
+        await swal({
+          title: "Registred successefuly",
+          text: "Please confirm your email to access our website!",
+          icon: "error",
+          timer: 2500,
+          buttons: false,
+        });
         window.location.href = "/";
       } catch (error) {
         console.log(error);
         swal({
-      title: 'An error occurred while signing up.',
-      text: ' Please check your details and try again.',
-      icon: 'error',
-      timer: 3000,
-      buttons: false,
-    });
+          title: "An error occurred while signing up.",
+          text: "Please check your details and try again.",
+          icon: "error",
+          timer: 3000,
+          buttons: false,
+        });
       }
     },
   },
